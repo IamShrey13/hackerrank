@@ -1,0 +1,37 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+long long gcd_ll(long long x, long long y){
+    while(y!=0){
+        long long r=x%y;
+        x=y;
+        y=r;
+    }
+    return x;
+}
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    int T;
+    if(!(cin>>T))
+    return 0;
+    while(T--){
+        long long a,b,c;
+        cin>>a>>b>>c;
+        if(c==0){
+            cout<<"YES\n";
+            continue;
+        }
+        long long m=max(a,b);
+        if(m==0){
+            cout<<"NO\n";
+            continue;
+        }
+        long long g=gcd_ll(a,b);
+        if(c<=m&&c%g==0)
+        cout<<"YES\n";
+        else
+        cout<<"NO\n";
+    }
+    return 0;
+}
