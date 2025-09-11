@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string encryption(const string &s_input) {
+    string s;
+    s.reserve(s_input.size());
+    for (char c : s_input) if (c != ' ') s.push_back(c);
+    int L = s.size();
+    double root = sqrt(L);
+    int rows = floor(root), cols = ceil(root);
+    if (rows * cols < L) ++rows;
+    vector<string> cols_strings(cols);
+    for (int i = 0; i < L; ++i) cols_strings[i % cols].push_back(s[i]);
+    string result;
+    for (int c = 0; c < cols; ++c) {
+        if (c > 0) result.push_back(' ');
+        result += cols_strings[c];
+    }
+    return result;
+}
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    string s_input;
+    getline(cin, s_input);
+    cout << encryption(s_input) << "\n";
+}
