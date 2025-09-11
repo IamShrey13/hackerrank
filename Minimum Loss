@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    long long n;
+    cin >> n;
+    vector<pair<long long, long long>> v;
+    v.reserve(n);
+    for (long long i = 0; i < n; i++) {
+        long long p;
+        cin >> p;
+        v.emplace_back(p, i);
+    }
+    sort(v.begin(), v.end(), [](const pair<long long,long long> &a, const pair<long long,long long> &b){
+        return a.first < b.first;
+    });
+    long long min_loss = LLONG_MAX;
+    for (long long i = 1; i < n; i++) {
+        long long price_hi = v[i].first;
+        long long idx_hi = v[i].second;
+        long long price_lo = v[i-1].first;
+        long long idx_lo = v[i-1].second;
+        if (idx_hi < idx_lo) {
+            long long loss = price_hi - price_lo;
+            if (loss < min_loss) {
+                min_loss = loss;
+            }
+        }
+    }
+    cout << min_loss << "\n";
+    return 0;
+}
