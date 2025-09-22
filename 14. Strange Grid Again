@@ -1,0 +1,17 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    long long r, c;
+    cin >> r >> c;
+    long long block = (r - 1) / 2;
+    long long start = block * 10; // 5 columns * 2 = 10 numbers per 2 rows block
+    long long ans;
+    if(r % 2 == 1) {
+        ans = start + (c - 1) * 2;
+    } else {
+        ans = start + (c - 1) * 2 + 1;
+    }
+    cout << ans << "\n";
+    return 0;
+}
