@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string findSpecialMultiple(int n) {
+    queue<string> q;
+    set<int> visited;
+    q.push("9");
+    
+    while(!q.empty()) {
+        string s = q.front();
+        q.pop();
+        long long rem = stoll(s) % n;
+        if(rem == 0) return s;
+        if(visited.count(rem)) continue;
+        visited.insert(rem);
+        q.push(s + "0");
+        q.push(s + "9");
+    }
+    return "";
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        int n;
+        cin >> n;
+        cout << findSpecialMultiple(n) << "\n";
+    }
+    return 0;
+}
