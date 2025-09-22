@@ -24,24 +24,20 @@ int toDecimal(int month, int day) {
 int main() {
     int n;
     cin >> n;
-    vector<pair<int,int>> events(n);
+    unordered_map<int,int> freq;
+    
     for(int i=0; i<n; i++) {
-        cin >> events[i].first >> events[i].second;
+        int m,d;
+        cin >> m >> d;
+        if(!isValid(m,d)) continue;
+        int val = toDecimal(m,d);
+        freq[val]++;
     }
 
-    int jokes = 0;
-    for(int i=0; i<n; i++) {
-        int m1 = events[i].first, d1 = events[i].second;
-        if(!isValid(m1,d1)) continue;
-
-        int val1 = toDecimal(m1,d1);
-        for(int j=i+1; j<n; j++) {
-            int m2 = events[j].first, d2 = events[j].second;
-            if(!isValid(m2,d2)) continue;
-
-            int val2 = toDecimal(m2,d2);
-            if(val1 == val2) jokes++;
-        }
+    long long jokes = 0;
+    for(auto it : freq) {
+        int f = it.second;
+        jokes += (long long)f*(f-1)/2;
     }
 
     cout << jokes << "\n";
