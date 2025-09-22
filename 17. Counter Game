@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+string counterGame(unsigned long n) {
+    int moves = 0;
+    while(n != 1) {
+        if((n & (n - 1)) == 0) {
+            n /= 2;
+        } else {
+            unsigned long p = 1UL << (63 - __builtin_clzll(n));
+            n -= p;
+        }
+        moves++;
+    }
+    return (moves % 2 == 1) ? "Louise" : "Richard";
+}
+
+int main() {
+    int t;
+    cin >> t;
+    while(t--) {
+        unsigned long n;
+        cin >> n;
+        cout << counterGame(n) << "\n";
+    }
+    return 0;
+}
