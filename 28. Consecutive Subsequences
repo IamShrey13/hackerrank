@@ -1,0 +1,41 @@
+#include <cmath>
+#include <cstdio>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+
+int main() {
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int T;
+    cin >> T;
+    while (T--) {
+        long long n, k;
+        cin >> n >> k;
+        vector<long long> arr(n);
+        for (int i = 0; i < n; i++)
+            cin >> arr[i];
+
+        vector<long long> freq(k, 0);
+        freq[0] = 1;  // For subarrays starting from index 0
+
+        long long prefixSum = 0;
+        long long count = 0;
+
+        for (int i = 0; i < n; i++) {
+            prefixSum = (prefixSum + arr[i]) % k;
+            if (prefixSum < 0) prefixSum += k;  // handle negative modulo
+
+            count += freq[prefixSum];
+            freq[prefixSum]++;
+        }
+
+        cout << count << "\n";
+    }
+
+    return 0;
+}
